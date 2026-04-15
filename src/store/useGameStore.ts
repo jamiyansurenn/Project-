@@ -95,6 +95,11 @@ async function readJson<T>(url: string, init?: RequestInit): Promise<T> {
   return (await res.json()) as T;
 }
 
+function isDatabaseConfigError(error: unknown): boolean {
+  if (!(error instanceof Error)) return false;
+  return /DATABASE_URL|Environment variable not found/i.test(error.message);
+}
+
 interface GameState {
   user: GameUser;
   wallet: WalletState;
@@ -150,19 +155,51 @@ export const useGameStore = create<GameState>()(
           const snapshot = await readJson<ProfileSnapshot>("/api/profile");
           applySnapshot(set, snapshot);
           set({ initialized: true });
+        } catch (error) {
+          // Allow demo usage when server DB env is missing (e.g. misconfigured deploy).
+          if (isDatabaseConfigError(error)) {
+            set({ initialized: true });
+            return;
+          }
+          throw error;
         } finally {
           set({ syncing: false });
         }
       },
       completeOnboarding: async (patch) => {
-        const snapshot = await readJson<ProfileSnapshot>("/api/profile", {
-          method: "PATCH",
-          body: JSON.stringify({
-            ...patch,
+        try {
+          const snapshot = await readJson<ProfileSnapshot>("/api/profile", {
+            method: "PATCH",
+            body: JSON.stringify({
+              ...patch,
+              onboarded: true,
+            }),
+          });
+          applySnapshot(set, snapshot);
+        } catch (error) {
+          // Fallback to local-only onboarding so mobile users can continue.
+          if (!isDatabaseConfigError(error)) throw error;
+
+          const current = get();
+          const safeName = patch.name?.trim();
+          const nextXp = Math.max(40, current.user.xp || 0);
+          const nextUser: GameUser = {
+            ...current.user,
+            name: safeName && safeName.length > 0 ? safeName : current.user.name,
+            avatarId: patch.avatarId ?? current.user.avatarId,
+            travelerType: patch.travelerType ?? current.user.travelerType,
             onboarded: true,
-          }),
-        });
-        applySnapshot(set, snapshot);
+            xp: nextXp,
+            level: getLevelFromXp(nextXp),
+          };
+          set({
+            user: nextUser,
+            wallet: {
+              xpBalance: Math.max(current.wallet.xpBalance, nextXp),
+            },
+            initialized: true,
+          });
+        }
       },
       refreshProfile: async () => {
         const snapshot = await readJson<ProfileSnapshot>("/api/profile");
