@@ -18,10 +18,10 @@ export function CelebrationModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-end justify-center bg-black/50 p-4 pb-28 backdrop-blur-sm sm:items-center sm:pb-4">
+    <div className="fixed inset-0 z-[70] flex items-end justify-center bg-slate-950/55 p-4 pb-28 backdrop-blur-md sm:items-center sm:pb-4">
       <div
         className={cn(
-          "w-full max-w-md overflow-hidden rounded-3xl border border-amber-400/40 bg-gradient-to-br from-zinc-950 via-zinc-900 to-orange-950 p-6 text-center text-white shadow-2xl shadow-orange-500/30",
+          "sim-glass-strong w-full max-w-md overflow-hidden rounded-xl border border-white/15 p-6 text-center text-white shadow-xl",
         )}
         role="dialog"
         aria-modal="true"
@@ -35,7 +35,7 @@ export function CelebrationModal({
           {title}
         </h2>
         <p className="mt-2 text-sm text-zinc-200">{subtitle}</p>
-        <div className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-white/10 px-4 py-2 text-sm font-semibold text-amber-200 ring-1 ring-white/20">
+        <div className="mt-5 inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-sky-100">
           <span>+{xpGained} XP</span>
           <span className="text-zinc-400">·</span>
           <span>Түвшний явц шинэчлэгдлээ</span>
@@ -43,7 +43,7 @@ export function CelebrationModal({
         <button
           type="button"
           onClick={onClose}
-          className="mt-6 w-full rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 py-3 text-sm font-semibold text-zinc-950 transition hover:brightness-110"
+          className="mt-6 w-full rounded-md bg-sky-600 py-2.5 text-sm font-semibold text-white transition hover:bg-sky-500"
         >
           Үргэлжлүүлэх
         </button>

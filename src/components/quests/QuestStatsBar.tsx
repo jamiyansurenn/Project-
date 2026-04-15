@@ -15,47 +15,51 @@ export function QuestStatsBar() {
   );
 
   return (
-    <section className="rounded-2xl border border-zinc-200/80 bg-gradient-to-br from-white to-zinc-50 p-4 shadow-sm dark:border-zinc-800/80 dark:from-zinc-900 dark:to-zinc-950 sm:flex sm:items-center sm:justify-between sm:gap-6 sm:p-5">
-      <div className="flex flex-1 flex-col gap-3 sm:flex-row sm:items-center sm:gap-8">
+    <section className="sim-glass relative rounded-md border border-white/10 p-3 sm:flex sm:items-center sm:justify-between sm:gap-5 sm:p-4">
+      <div className="flex flex-1 flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
             Түвшин
           </p>
-          <p className="mt-1 text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+          <p className="mt-0.5 font-mono text-2xl font-semibold tabular-nums text-zinc-100">
             {level}
           </p>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+          <p className="text-[10px] text-zinc-500">
             Дараагийн босго · {nextAt} XP
           </p>
         </div>
-        <div className="hidden h-10 w-px bg-zinc-200 dark:bg-zinc-800 sm:block" />
+        <div className="hidden h-8 w-px bg-white/10 sm:block" />
         <div className="flex-1">
-          <div className="flex items-center justify-between text-[10px] font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+          <div className="flex items-center justify-between text-[10px] font-medium uppercase tracking-wide text-zinc-500">
             <span>XP</span>
-            <span>{user.xp} XP · {percent}%</span>
+            <span className="font-mono tabular-nums">
+              {user.xp} · {percent}%
+            </span>
           </div>
-          <div className="mt-2 h-2 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
+          <div className="relative mt-1.5 h-1.5 overflow-hidden rounded-full bg-slate-900/90 ring-1 ring-white/10">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 transition-all duration-500"
+              className="relative h-full overflow-hidden rounded-full bg-sky-500/85 transition-all duration-500"
               style={{ width: `${percent}%` }}
-            />
+            >
+              <span className="xp-bar-shine" />
+            </div>
           </div>
         </div>
       </div>
-      <div className="mt-4 flex gap-3 border-t border-zinc-200/80 pt-4 sm:mt-0 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0 dark:border-zinc-800/80">
+      <div className="mt-3 flex gap-4 border-t border-white/10 pt-3 sm:mt-0 sm:border-l sm:border-t-0 sm:pl-5 sm:pt-0">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
             Нийт XP
           </p>
-          <p className="mt-1 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+          <p className="mt-0.5 font-mono text-base font-semibold tabular-nums text-zinc-200">
             {user.xp}
           </p>
         </div>
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
             Идэвхтэй
           </p>
-          <p className="mt-1 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+          <p className="mt-0.5 font-mono text-base font-semibold tabular-nums text-sky-200">
             {activeCount}
           </p>
         </div>

@@ -36,8 +36,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+    { media: "(prefers-color-scheme: light)", color: "#1a2433" },
+    { media: "(prefers-color-scheme: dark)", color: "#1a2433" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -54,7 +54,7 @@ export default function RootLayout({
       lang="mn"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
+      <body className="flex min-h-full flex-col bg-[#1a2433] text-zinc-100">
         <AppShell>{children}</AppShell>
       </body>
     </html>

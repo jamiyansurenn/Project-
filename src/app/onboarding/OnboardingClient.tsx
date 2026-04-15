@@ -33,6 +33,7 @@ const styles: { id: TravelerType; copy: string }[] = [
 export function OnboardingClient() {
   const router = useRouter();
   const completeOnboarding = useGameStore((s) => s.completeOnboarding);
+  const [saving, setSaving] = useState(false);
   const [step, setStep] = useState(1);
   const [travelerType, setTravelerType] = useState<TravelerType>("explorer");
   const [avatarId, setAvatarId] = useState<string>("steppe");
@@ -42,25 +43,30 @@ export function OnboardingClient() {
   const canContinueStep2 = Boolean(avatarId);
   const canStart = name.trim().length >= 2;
 
-  const startDemo = () => {
-    completeOnboarding({
-      name: name.trim(),
-      avatarId,
-      travelerType,
-    });
-    router.push("/quests");
+  const startDemo = async () => {
+    setSaving(true);
+    try {
+      await completeOnboarding({
+        name: name.trim(),
+        avatarId,
+        travelerType,
+      });
+      router.push("/quests");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
     <div className="mx-auto max-w-lg space-y-8 pb-16 pt-4">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-orange-600 dark:text-orange-400">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-200/80">
           Эхлэх
         </p>
-        <h1 className="mt-2 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+        <h1 className="game-title-gradient mt-2 text-2xl font-bold tracking-tight">
           Аяллын төрлөө сонго
         </h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-2 text-sm text-zinc-400">
           Бүртгэл шаардлагагүй. Энэ демо таны төхөөрөмж дээр хадгалагдана.
         </p>
       </div>
@@ -68,10 +74,8 @@ export function OnboardingClient() {
       <OnboardingStepper step={step} total={3} />
 
       {step === 1 ? (
-        <section className="space-y-4">
-          <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
-            Сонголт
-          </h2>
+        <section className="game-panel-strong space-y-4 rounded-2xl p-5">
+          <h2 className="text-sm font-semibold text-zinc-100">Сонголт</h2>
           <div className="grid gap-3">
             {styles.map((s) => (
               <button
@@ -79,18 +83,14 @@ export function OnboardingClient() {
                 type="button"
                 onClick={() => setTravelerType(s.id)}
                 className={cn(
-                  "rounded-2xl border p-4 text-left transition",
+                  "rounded-2xl border p-4 text-left transition duration-300",
                   travelerType === s.id
-                    ? "border-orange-500/60 bg-orange-500/10 shadow-sm"
-                    : "border-zinc-200/80 hover:border-zinc-300 dark:border-zinc-800/80 dark:hover:border-zinc-600",
+                    ? "border-amber-400/50 bg-gradient-to-r from-amber-500/20 to-violet-600/15 shadow-[0_0_20px_rgba(251,191,36,0.2)]"
+                    : "game-panel border-transparent hover:border-violet-400/25",
                 )}
               >
-                <p className="font-medium text-zinc-900 dark:text-zinc-50">
-                  {TRAVELER_LABELS[s.id]}
-                </p>
-                <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-                  {s.copy}
-                </p>
+                <p className="font-medium text-zinc-50">{TRAVELER_LABELS[s.id]}</p>
+                <p className="mt-1 text-sm text-zinc-400">{s.copy}</p>
               </button>
             ))}
           </div>
@@ -98,7 +98,7 @@ export function OnboardingClient() {
             type="button"
             disabled={!canContinueStep1}
             onClick={() => setStep(2)}
-            className="w-full rounded-2xl bg-zinc-900 py-3 text-sm font-semibold text-white transition enabled:hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:enabled:hover:bg-white"
+            className="w-full rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-700 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition enabled:hover:brightness-110"
           >
             Үргэлжлүүлэх
           </button>
@@ -106,10 +106,8 @@ export function OnboardingClient() {
       ) : null}
 
       {step === 2 ? (
-        <section className="space-y-4">
-          <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
-            Дүр сонгох
-          </h2>
+        <section className="game-panel-strong space-y-4 rounded-2xl p-5">
+          <h2 className="text-sm font-semibold text-zinc-100">Дүр сонгох</h2>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {AVATAR_OPTIONS.map((a) => (
               <button
@@ -117,16 +115,14 @@ export function OnboardingClient() {
                 type="button"
                 onClick={() => setAvatarId(a.id)}
                 className={cn(
-                  "rounded-2xl border p-4 text-center transition",
+                  "rounded-2xl border p-4 text-center transition duration-300",
                   avatarId === a.id
-                    ? "border-orange-500/60 bg-orange-500/10"
-                    : "border-zinc-200/80 dark:border-zinc-800/80",
+                    ? "border-sky-400/50 bg-sky-500/15 shadow-[0_0_16px_rgba(56,189,248,0.25)]"
+                    : "game-panel border-transparent hover:border-white/15",
                 )}
               >
                 <span className="text-3xl">{a.emoji}</span>
-                <p className="mt-2 text-xs font-medium text-zinc-700 dark:text-zinc-200">
-                  {a.label}
-                </p>
+                <p className="mt-2 text-xs font-medium text-zinc-200">{a.label}</p>
               </button>
             ))}
           </div>
@@ -134,7 +130,7 @@ export function OnboardingClient() {
             <button
               type="button"
               onClick={() => setStep(1)}
-              className="flex-1 rounded-2xl border border-zinc-300 py-3 text-sm font-semibold dark:border-zinc-700"
+              className="game-panel flex-1 rounded-2xl border border-white/10 py-3 text-sm font-semibold text-zinc-200 transition hover:border-white/20"
             >
               Буцах
             </button>
@@ -142,7 +138,7 @@ export function OnboardingClient() {
               type="button"
               disabled={!canContinueStep2}
               onClick={() => setStep(3)}
-              className="flex-1 rounded-2xl bg-zinc-900 py-3 text-sm font-semibold text-white dark:bg-zinc-100 dark:text-zinc-900"
+              className="flex-1 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-700 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition enabled:hover:brightness-110 disabled:opacity-40"
             >
               Үргэлжлүүлэх
             </button>
@@ -151,34 +147,32 @@ export function OnboardingClient() {
       ) : null}
 
       {step === 3 ? (
-        <section className="space-y-4">
-          <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
-            Нэр оруулах
-          </h2>
+        <section className="game-panel-strong space-y-4 rounded-2xl p-5">
+          <h2 className="text-sm font-semibold text-zinc-100">Нэр оруулах</h2>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Жишээ: Нараа"
-            className="w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm outline-none ring-0 focus:border-orange-400 focus:ring-2 focus:ring-orange-400/30 dark:border-zinc-800 dark:bg-zinc-900"
+            className="w-full rounded-2xl border border-white/15 bg-zinc-950/50 px-4 py-3 text-sm text-zinc-100 outline-none ring-0 placeholder:text-zinc-500 focus:border-amber-400/50 focus:ring-2 focus:ring-amber-400/25"
           />
-          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+          <p className="text-xs text-zinc-500">
             Хамгийн багадаа 2 тэмдэгт. (Демо өгөгдөл)
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <button
               type="button"
               onClick={() => setStep(2)}
-              className="sm:flex-1 rounded-2xl border border-zinc-300 py-3 text-sm font-semibold dark:border-zinc-700"
+              className="game-panel sm:flex-1 rounded-2xl border border-white/10 py-3 text-sm font-semibold text-zinc-200 transition hover:border-white/20"
             >
               Буцах
             </button>
             <button
               type="button"
-              disabled={!canStart}
+              disabled={saving || !canStart}
               onClick={startDemo}
-              className="sm:flex-1 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 py-3 text-sm font-semibold text-zinc-950 shadow-lg shadow-orange-500/25 disabled:opacity-40"
+              className="sm:flex-1 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 py-3 text-sm font-semibold text-zinc-950 shadow-[0_0_28px_rgba(251,191,36,0.35)] transition enabled:hover:brightness-110 disabled:opacity-40 disabled:shadow-none"
             >
-              Эхлэх
+              {saving ? "Түр хүлээнэ үү..." : "Эхлэх"}
             </button>
           </div>
         </section>

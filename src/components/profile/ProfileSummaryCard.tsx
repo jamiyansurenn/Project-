@@ -24,24 +24,25 @@ export function ProfileSummaryCard({
   return (
     <section
       className={cn(
-        "overflow-hidden rounded-3xl border border-zinc-200/80 bg-gradient-to-br from-white via-zinc-50 to-orange-50/60 p-6 shadow-sm dark:border-zinc-800/80 dark:from-zinc-950 dark:via-zinc-900 dark:to-orange-950/40",
+        "sim-glass-strong relative overflow-hidden rounded-xl p-5",
         className,
       )}
     >
-      <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
+      <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center">
         <div className="flex items-center gap-4">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-zinc-900 text-3xl text-white shadow-lg dark:bg-zinc-100 dark:text-zinc-900">
-            {avatar?.emoji ?? "🧭"}
+          <div className="relative">
+            <div className="relative flex h-20 w-20 items-center justify-center rounded-lg border border-white/10 bg-slate-900/80 text-4xl">
+              {avatar?.emoji ?? "🧭"}
+            </div>
+            <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded border border-white/15 bg-slate-900/90 px-2 py-0.5 text-[10px] font-semibold text-zinc-200">
+              Түв {level}
+            </span>
           </div>
           <div>
-            <p className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
-              {name}
-            </p>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
-              {TRAVELER_LABELS[travelerType]}
-            </p>
-            <p className="mt-1 inline-flex items-center rounded-full bg-zinc-900 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-200 dark:bg-zinc-100 dark:text-orange-700">
-              Аялагч · Түв {level}
+            <p className="text-lg font-semibold text-zinc-50">{name}</p>
+            <p className="text-sm text-zinc-400">{TRAVELER_LABELS[travelerType]}</p>
+            <p className="mt-2 text-[10px] font-semibold uppercase tracking-widest text-zinc-500">
+              Профайл
             </p>
           </div>
         </div>

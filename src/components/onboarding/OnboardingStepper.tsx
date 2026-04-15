@@ -25,7 +25,7 @@ export function OnboardingStepper({
                 done && "bg-emerald-500 text-white",
                 active &&
                   "bg-gradient-to-br from-amber-400 to-orange-500 text-zinc-950 shadow-md",
-                !done && !active && "bg-zinc-200 text-zinc-500 dark:bg-zinc-800",
+                !done && !active && "border border-white/10 bg-white/5 text-zinc-500",
               )}
             >
               {done ? "✓" : n}
@@ -34,7 +34,7 @@ export function OnboardingStepper({
               <div
                 className={cn(
                   "h-0.5 flex-1 rounded-full",
-                  done ? "bg-emerald-500/70" : "bg-zinc-200 dark:bg-zinc-800",
+                  done ? "bg-emerald-500/70" : "bg-white/10",
                 )}
               />
             ) : null}

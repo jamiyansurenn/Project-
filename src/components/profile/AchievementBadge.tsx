@@ -11,25 +11,32 @@ export function AchievementBadge({
   return (
     <div
       className={cn(
-        "flex items-start gap-3 rounded-2xl border p-3 transition",
+        "flex items-start gap-3 rounded-md border p-3 transition duration-200",
         unlocked
-          ? "border-orange-500/40 bg-orange-500/5 shadow-sm dark:border-orange-500/30"
-          : "border-dashed border-zinc-300 bg-zinc-50/50 opacity-70 dark:border-zinc-700 dark:bg-zinc-900/40",
+          ? "sim-glass border-sky-500/35 hover:border-sky-400/45"
+          : "border-dashed border-white/10 bg-slate-950/50 opacity-60",
       )}
     >
-      <span className="text-2xl">{achievement.icon}</span>
+      <span
+        className={cn(
+          "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border text-2xl",
+          unlocked
+            ? "border-white/15 bg-slate-900/70"
+            : "border-white/5 bg-slate-900/50 grayscale",
+        )}
+      >
+        {achievement.icon}
+      </span>
       <div>
-        <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
+        <p className="text-sm font-bold text-zinc-50">
           {achievement.title}
           {!unlocked ? (
-            <span className="ml-2 text-[10px] font-medium uppercase tracking-wide text-zinc-400">
+            <span className="ml-2 text-[10px] font-medium uppercase tracking-wide text-zinc-500">
               Түгжээтэй
             </span>
           ) : null}
         </p>
-        <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
-          {achievement.description}
-        </p>
+        <p className="mt-1 text-xs text-zinc-400">{achievement.description}</p>
       </div>
     </div>
   );

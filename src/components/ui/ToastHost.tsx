@@ -31,11 +31,11 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           <div
             key={t.id}
             className={cn(
-              "pointer-events-auto max-w-md rounded-2xl border px-4 py-3 text-sm shadow-lg backdrop-blur-md transition duration-300",
+              "pointer-events-auto max-w-md rounded-2xl border px-4 py-3 text-sm shadow-lg backdrop-blur-xl transition duration-300",
               t.tone === "success" &&
-                "border-emerald-500/30 bg-emerald-500/15 text-emerald-950 dark:text-emerald-100",
+                "border-amber-400/45 bg-gradient-to-r from-amber-500/20 to-emerald-600/15 text-amber-50 shadow-[0_0_24px_rgba(251,191,36,0.2)]",
               t.tone === "info" &&
-                "border-sky-500/30 bg-sky-500/15 text-sky-950 dark:text-sky-100",
+                "border-violet-400/40 bg-gradient-to-r from-violet-600/25 to-sky-600/15 text-violet-50 shadow-[0_0_20px_rgba(139,92,246,0.18)]",
             )}
           >
             {t.message}

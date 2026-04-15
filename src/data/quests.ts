@@ -324,7 +324,6 @@ if (process.env.NODE_ENV !== "production") {
   for (const q of MOCK_QUESTS) {
     const sum = sumStepXp(q.steps);
     if (sum !== q.rewardXp) {
-      // eslint-disable-next-line no-console
       console.warn(`[Project α] rewardXp mismatch for "${q.id}": steps=${sum}, rewardXp=${q.rewardXp}`);
     }
   }

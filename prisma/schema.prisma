@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum TravelerType {
+  explorer
+  food_hunter
+  culture_seeker
+  adventure_rider
+}
+
+enum XpSourceType {
+  QUEST_COMPLETE
+  SHOP_PURCHASE
+  ADMIN_ADJUST
+}
+
+model User {
+  id                String            @id
+  name              String
+  avatarId          String
+  travelerType      TravelerType
+  xp                Int               @default(0)
+  level             Int               @default(1)
+  onboarded         Boolean           @default(false)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  activeQuests      ActiveQuest[]
+  questCompletions  QuestCompletion[]
+  xpLedgerEntries   XpLedger[]
+  inventoryItems    InventoryItem[]
+}
+
+model ActiveQuest {
+  id        String   @id @default(cuid())
+  userId    String
+  questId   String
+  startedAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, questId])
+}
+
+model QuestCompletion {
+  id             String   @id @default(cuid())
+  userId         String
+  questId        String
+  rewardXp       Int
+  proofPhoto     Boolean  @default(false)
+  proofGps       Boolean  @default(false)
+  completedAt    DateTime @default(now())
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, questId])
+}
+
+model XpLedger {
+  id         String       @id @default(cuid())
+  userId     String
+  delta      Int
+  sourceType XpSourceType
+  sourceId   String?
+  note       String?
+  metadata   String?
+  createdAt  DateTime     @default(now())
+  user       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ShopItem {
+  id          String          @id @default(cuid())
+  slug        String          @unique
+  name        String
+  description String
+  priceXp     Int
+  rarity      String
+  active      Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  inventory   InventoryItem[]
+}
+
+model InventoryItem {
+  id         String    @id @default(cuid())
+  userId     String
+  shopItemId String
+  quantity   Int       @default(1)
+  acquiredAt DateTime  @default(now())
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shopItem   ShopItem  @relation(fields: [shopItemId], references: [id], onDelete: Restrict)
+
+  @@unique([userId, shopItemId])
+}
