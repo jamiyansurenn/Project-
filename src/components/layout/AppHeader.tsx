@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { cn } from "@/lib/cn";
 import { useGameStore } from "@/store/useGameStore";
 import { getXpProgress } from "@/lib/xp";
@@ -25,8 +26,15 @@ export function AppHeader() {
     <header className="sticky top-0 z-40 border-b border-zinc-200/70 bg-white/80 backdrop-blur-xl dark:border-zinc-800/80 dark:bg-zinc-950/80">
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
         <Link href="/quests" className="flex items-center gap-2">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 via-orange-500 to-rose-500 text-lg shadow-md shadow-orange-500/20">
-            α
+          <span className="relative h-9 w-9 overflow-hidden rounded-xl border border-cyan-200/70 bg-white shadow-md shadow-cyan-500/10 dark:border-cyan-900/80 dark:bg-zinc-900">
+            <Image
+              src="/alpha-logo.png"
+              alt="Project α лого"
+              fill
+              sizes="36px"
+              className="object-contain p-0.5"
+              priority
+            />
           </span>
           <div className="leading-tight">
             <p className="text-xs font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
