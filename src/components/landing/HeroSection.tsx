@@ -2,25 +2,6 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 import { HeroPreviewStack } from "@/components/landing/HeroPreviewStack";
 
-function FloatingChip({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cn(
-        "travel-chip pointer-events-none absolute z-20 rounded-full px-3 py-1.5 text-[11px] font-medium tracking-wide text-stone-700 shadow-sm",
-        className,
-      )}
-    >
-      {children}
-    </div>
-  );
-}
-
 export function HeroSection({ className }: { className?: string }) {
   return (
     <section
@@ -43,10 +24,6 @@ export function HeroSection({ className }: { className?: string }) {
         className="pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-100/20 blur-3xl"
         aria-hidden
       />
-
-      <FloatingChip className="right-[6%] top-[16%] animate-float-gentle-delay">
-        Шинэ даалгавар
-      </FloatingChip>
 
       <div className="relative z-10 grid items-center gap-12 lg:grid-cols-[1fr_320px] lg:gap-16">
         <div className="max-w-xl animate-fade-up">

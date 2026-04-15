@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { OnboardingStepper } from "@/components/onboarding/OnboardingStepper";
+import { useToast } from "@/components/ui/ToastHost";
 import { useGameStore } from "@/store/useGameStore";
 import {
   AVATAR_OPTIONS,
@@ -32,6 +33,7 @@ const styles: { id: TravelerType; copy: string }[] = [
 
 export function OnboardingClient() {
   const router = useRouter();
+  const toast = useToast();
   const completeOnboarding = useGameStore((s) => s.completeOnboarding);
   const [saving, setSaving] = useState(false);
   const [step, setStep] = useState(1);
@@ -42,16 +44,38 @@ export function OnboardingClient() {
   const canContinueStep1 = true;
   const canContinueStep2 = Boolean(avatarId);
   const canStart = name.trim().length >= 2;
+  const START_TIMEOUT_MS = 12000;
 
   const startDemo = async () => {
     setSaving(true);
     try {
-      await completeOnboarding({
-        name: name.trim(),
-        avatarId,
-        travelerType,
-      });
-      router.push("/quests");
+      await Promise.race([
+        completeOnboarding({
+          name: name.trim(),
+          avatarId,
+          travelerType,
+        }),
+        new Promise((_, reject) =>
+          setTimeout(
+            () =>
+              reject(
+                new Error(
+                  "Сервер удааширч байна. Дахин оролдоно уу.",
+                ),
+              ),
+            START_TIMEOUT_MS,
+          ),
+        ),
+      ]);
+      router.replace("/quests");
+      router.refresh();
+    } catch (error) {
+      toast(
+        error instanceof Error
+          ? error.message
+          : "Эхлүүлэхэд алдаа гарлаа. Дахин оролдоно уу.",
+        "info",
+      );
     } finally {
       setSaving(false);
     }
