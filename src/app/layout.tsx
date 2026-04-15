@@ -23,9 +23,9 @@ export const metadata: Metadata = {
   applicationName: "Project α",
   manifest: "/manifest.webmanifest",
   icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/apple-icon.png",
+    icon: "/icon.png?v=2",
+    shortcut: "/icon.png?v=2",
+    apple: "/apple-icon.png?v=2",
   },
   appleWebApp: {
     capable: true,

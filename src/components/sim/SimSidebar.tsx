@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { AlphaLogoMark } from "@/components/branding/AlphaLogoMark";
 import { cn } from "@/lib/cn";
 
 const tools = [
@@ -26,8 +26,14 @@ export function SimSidebar() {
         className="mb-4 flex items-center justify-center gap-2 px-2 md:justify-start md:px-3"
         aria-label="Нүүр хуудас"
       >
-        <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-teal-600/25 bg-gradient-to-br from-teal-600 to-teal-700 shadow-sm ring-1 ring-white/15">
-          <AlphaLogoMark className="h-[22px] w-[22px] text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.12)]" />
+        <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-stone-200/80 bg-white shadow-sm ring-1 ring-white/30">
+          <Image
+            src="/alpha-logo.png"
+            alt="Project alpha logo"
+            fill
+            sizes="36px"
+            className="object-cover"
+          />
         </span>
         <span className="hidden min-w-0 truncate text-left text-xs font-semibold leading-tight text-stone-800 md:block">
           Project α
