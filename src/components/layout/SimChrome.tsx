@@ -11,7 +11,7 @@ export function SimChrome({ children }: { children: React.ReactNode }) {
   if (bare) {
     return (
       <div className="relative z-10 flex min-h-dvh flex-col">
-        <main className="relative z-10 mx-auto w-full max-w-5xl flex-1 px-4 pb-16 pt-2">
+        <main className="relative z-10 mx-auto w-full max-w-6xl flex-1 px-5 pb-20 pt-4 sm:px-8 sm:pt-6">
           {children}
         </main>
       </div>

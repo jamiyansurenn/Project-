@@ -62,13 +62,13 @@ export function QuestsClient() {
             markers={quests}
             selectedId={selectedId}
             onSelect={setSelectedId}
-            className="h-full border border-white/40 shadow-md md:rounded-xl"
+            className="h-full border border-stone-200/80 shadow-md md:rounded-2xl"
           />
 
           {/* Шүүлтүүр: баруун дээд — зүүн дээд талд газрын зурагны тэмдэгтэй давхцахгүй */}
           <div className="pointer-events-none absolute inset-2 z-20 flex flex-col items-end gap-2 md:inset-4">
             <div className="pointer-events-auto w-full max-w-md md:max-w-sm">
-              <div className="sim-glass rounded-lg border border-white/15 p-3 shadow-md">
+              <div className="rounded-2xl border border-stone-200/80 bg-white/85 p-3 shadow-md backdrop-blur-md">
                 <QuestFilterBar
                   statusFilter={statusFilter}
                   onStatusChange={setStatusFilter}
@@ -94,7 +94,7 @@ export function QuestsClient() {
                       setCategoryFilter("all");
                       setSearch("");
                     }}
-                    className="rounded-md border border-sky-400/40 bg-sky-500/15 px-4 py-2 text-sm font-semibold text-sky-100 transition hover:bg-sky-500/25"
+                    className="rounded-xl border border-teal-200/90 bg-teal-50 px-4 py-2 text-sm font-semibold text-teal-900 transition hover:bg-teal-100/80"
                   >
                     Цэвэрлэх
                   </button>

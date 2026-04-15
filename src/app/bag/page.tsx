@@ -19,23 +19,23 @@ export default function BagPage() {
   return (
     <div className="mx-auto max-w-3xl space-y-8 px-4 py-4 pb-16 md:px-6">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-200/80">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
           Цүнх
         </p>
         <h1 className="sim-heading mt-2 text-2xl font-bold tracking-tight">Миний цүнх</h1>
-        <p className="mt-2 text-sm text-zinc-400">
+        <p className="mt-2 text-sm leading-relaxed text-stone-600">
           Худалдан авсан бараанууд энд хадгалагдана.
         </p>
       </div>
 
       <section className="game-panel-strong rounded-2xl p-5">
         <SectionTitle title="Одоогийн XP" />
-        <p className="mt-2 bg-gradient-to-r from-sky-200 to-violet-300 bg-clip-text text-xl font-bold text-transparent">
+        <p className="mt-2 bg-gradient-to-r from-teal-700 to-sky-600 bg-clip-text text-xl font-bold tabular-nums text-transparent">
           {wallet.xpBalance} XP
         </p>
         <Link
           href="/shop"
-          className="mt-3 inline-flex text-sm font-semibold text-amber-300 transition hover:text-amber-200"
+          className="mt-3 inline-flex text-sm font-semibold text-amber-800 underline-offset-2 transition duration-500 hover:text-amber-900 hover:underline"
         >
           XP дэлгүүр рүү очих →
         </Link>
@@ -48,12 +48,9 @@ export default function BagPage() {
         />
       ) : (
         <section className="space-y-3">
-          <SectionTitle title="Таны бараанууд" />
-          <div className="grid gap-3 sm:grid-cols-2">
-            {inventory.map((entry) => (
-              <BagItemCard key={entry.id} entry={entry} />
-            ))}
-          </div>
+          {inventory.map((entry) => (
+            <BagItemCard key={entry.id} entry={entry} />
+          ))}
         </section>
       )}
     </div>

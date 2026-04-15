@@ -38,24 +38,24 @@ export default function ShopPage() {
   return (
     <div className="mx-auto max-w-3xl space-y-8 px-4 py-4 pb-16 md:px-6">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
           XP Дэлгүүр
         </p>
         <h1 className="sim-heading mt-2 text-2xl font-bold tracking-tight">XP дэлгүүр</h1>
-        <p className="mt-2 text-sm text-zinc-400">
+        <p className="mt-2 text-sm leading-relaxed text-stone-600">
           Даалгавраас авсан XP-ээ item авахад ашиглаарай.
         </p>
       </div>
 
       <section className="game-panel-strong rounded-2xl p-5">
         <SectionTitle title="Таны XP үлдэгдэл" />
-        <p className="mt-2 font-mono text-2xl font-semibold tabular-nums text-sky-200">
+        <p className="mt-2 font-mono text-2xl font-semibold tabular-nums text-teal-700">
           {wallet.xpBalance} XP
         </p>
       </section>
 
       {loadingShop ? (
-        <p className="text-sm text-zinc-400">Дэлгүүр ачаалж байна...</p>
+        <p className="text-sm text-stone-600">Дэлгүүр ачаалж байна...</p>
       ) : shopItems.length === 0 ? (
         <EmptyState
           title="Одоогоор бараа алга"

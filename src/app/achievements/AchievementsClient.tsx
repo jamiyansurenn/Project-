@@ -19,11 +19,11 @@ export function AchievementsClient() {
   return (
     <div className="mx-auto max-w-3xl space-y-8 px-4 py-4 pb-16 md:px-6">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
           Симулятор
         </p>
         <h1 className="sim-heading mt-2 text-2xl font-bold tracking-tight">Амжилт</h1>
-        <p className="mt-2 text-sm text-zinc-400">
+        <p className="mt-2 text-sm leading-relaxed text-stone-600">
           Даалгавар болон XP-ээр нээгддэг амжилтын жагсаалт.
         </p>
       </div>

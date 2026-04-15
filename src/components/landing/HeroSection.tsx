@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { HeroPreviewStack } from "@/components/landing/HeroPreviewStack";
 
 function FloatingChip({
   children,
@@ -11,7 +12,7 @@ function FloatingChip({
   return (
     <div
       className={cn(
-        "sim-glass pointer-events-none absolute z-20 rounded-md border border-white/10 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-zinc-200 shadow-sm",
+        "travel-chip pointer-events-none absolute z-20 rounded-full px-3 py-1.5 text-[11px] font-medium tracking-wide text-stone-700 shadow-sm",
         className,
       )}
     >
@@ -24,89 +25,66 @@ export function HeroSection({ className }: { className?: string }) {
   return (
     <section
       className={cn(
-        "sim-glass-strong relative overflow-hidden rounded-2xl px-6 py-14 text-white sm:px-10 sm:py-20",
+        "relative overflow-hidden rounded-3xl border border-stone-200/60 bg-gradient-to-br from-sky-50/90 via-white to-amber-50/50 px-6 py-14 shadow-sm sm:px-10 sm:py-20",
         className,
       )}
     >
-      {/* Landscape layers */}
+      {/* Ambient washes */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-90"
+        className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-sky-200/35 blur-3xl animate-ambient-drift"
         aria-hidden
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-sky-900/40 via-slate-900/50 to-emerald-950/35" />
-        <div className="absolute -bottom-1 left-0 right-0 h-[45%] bg-gradient-to-t from-slate-950/95 via-slate-900/40 to-transparent" />
-        <div
-          className="absolute bottom-0 left-[-10%] right-[-10%] h-[38%] opacity-80"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 100% at 50% 100%, rgba(30,20,50,0.95) 0%, transparent 70%)",
-          }}
-        />
-        {/* Sun / moon glow */}
-        <div className="absolute right-[12%] top-[8%] h-20 w-20 rounded-full bg-sky-400/25 blur-2xl" />
-      </div>
-
-      {/* Character silhouette placeholder */}
+      />
       <div
-        className="pointer-events-none absolute bottom-0 left-1/2 z-10 h-[min(52%,280px)] w-[45%] max-w-xs -translate-x-1/2 animate-float-slow sm:left-[58%] sm:h-[min(58%,320px)] sm:max-w-sm"
+        className="pointer-events-none absolute -right-16 bottom-0 h-64 w-64 rounded-full bg-amber-200/30 blur-3xl animate-ambient-drift"
+        style={{ animationDelay: "-6s" }}
         aria-hidden
-      >
-        <svg
-          viewBox="0 0 200 320"
-          className="h-full w-full drop-shadow-md"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient id="sil" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="rgba(15,23,42,0.95)" />
-              <stop offset="100%" stopColor="rgba(30,27,75,0.85)" />
-            </linearGradient>
-          </defs>
-          <ellipse cx="100" cy="295" rx="70" ry="12" fill="rgba(0,0,0,0.35)" />
-          <path
-            d="M100 40 C130 40 145 70 145 100 L145 180 L165 260 L150 268 L135 200 L120 280 L105 275 L115 175 L100 165 L85 175 L95 275 L80 280 L65 200 L50 268 L35 260 L55 180 L55 100 C55 70 70 40 100 40Z"
-            fill="url(#sil)"
-          />
-          <circle cx="100" cy="85" r="38" fill="url(#sil)" />
-        </svg>
-      </div>
+      />
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-100/20 blur-3xl"
+        aria-hidden
+      />
 
-      {/* Floating HUD */}
-      <FloatingChip className="left-[6%] top-[12%]">+50 XP</FloatingChip>
-      <FloatingChip className="right-[8%] top-[18%]">Шинэ даалгавар</FloatingChip>
-      <FloatingChip className="left-[8%] bottom-[26%] sm:bottom-[30%]">
-        Түвшин 2
+      <FloatingChip className="right-[6%] top-[16%] animate-float-gentle-delay">
+        Шинэ даалгавар
       </FloatingChip>
 
-      <div className="relative z-30 max-w-xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-zinc-400">
-          Аяллын симулятор
-        </p>
-        <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-zinc-50 sm:text-5xl">
-          Монголын зураг дээр өөрийн маршрутаа бүтээгээрэй
-        </h1>
-        <p className="mt-4 max-w-md text-sm leading-relaxed text-zinc-400 sm:text-base">
-          Даалгавар, XP, түвшин — бүгд нэг дэлгэц дээр. Газрын зураг дээрх тэмдгүүдээс эхлүүлээд
-          аяллаа төлөвлөөрэй.
-        </p>
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+      <div className="relative z-10 grid items-center gap-12 lg:grid-cols-[1fr_320px] lg:gap-16">
+        <div className="max-w-xl animate-fade-up">
           <Link
-            href="/onboarding"
-            className="inline-flex items-center justify-center rounded-md bg-sky-600 px-8 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-500"
+            href="/"
+            className="inline-block text-xs font-semibold uppercase tracking-[0.22em] text-teal-700/85 transition duration-300 hover:text-teal-800"
           >
-            Аяллаа эхлэх
+            Аяллын платформ
           </Link>
-          <Link
-            href="/quests"
-            className="inline-flex items-center justify-center rounded-md border border-white/15 bg-white/5 px-6 py-3 text-sm font-medium text-zinc-200 transition hover:border-sky-400/40 hover:bg-sky-500/10"
-          >
-            Газрын зураг нээх
-          </Link>
+          <h1 className="mt-5 text-3xl font-bold leading-[1.12] tracking-tight text-stone-900 sm:text-4xl lg:text-[2.65rem]">
+            Монголын зураг дээр өөрийн аяллыг төлөвлөж, аажмаар нээгээрэй
+          </h1>
+          <p className="mt-5 max-w-lg text-base leading-relaxed text-stone-600 sm:text-[1.05rem]">
+            Даалгавар, XP, түвшин — зөөлөн, ойлгомжтой интерфейс. Газрын зураг дээрх тэмдгүүдээс
+            эхлээд аяллаа нэг дор удирдаарай.
+          </p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link
+              href="/onboarding"
+              className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-b from-teal-600 to-teal-700 px-8 py-3.5 text-sm font-semibold text-white shadow-md shadow-teal-900/10 transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-teal-900/15 hover:brightness-[1.03]"
+            >
+              Аяллаа эхлэх
+            </Link>
+            <Link
+              href="/quests"
+              className="inline-flex items-center justify-center rounded-2xl border border-stone-300/80 bg-white/70 px-7 py-3.5 text-sm font-medium text-stone-700 shadow-sm backdrop-blur-sm transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-teal-300/60 hover:bg-white hover:shadow-md"
+            >
+              Газрын зураг нээх
+            </Link>
+          </div>
+          <p className="mt-4 text-xs leading-relaxed text-stone-500">
+            Демо: өгөгдөл таны төхөөрөмж болон серверт хадгалагдана.
+          </p>
         </div>
-        <p className="mt-3 text-[11px] text-zinc-500">
-          Демо: өгөгдөл төхөөрөмж болон серверт хадгалагдана.
-        </p>
+
+        <div className="animate-fade-up-delay-1 flex justify-center lg:justify-end">
+          <HeroPreviewStack />
+        </div>
       </div>
     </section>
   );

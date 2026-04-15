@@ -30,14 +30,14 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     title: "Project α",
-    statusBarStyle: "black-translucent",
+    statusBarStyle: "default",
   },
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#1a2433" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a2433" },
+    { media: "(prefers-color-scheme: light)", color: "#eef4f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#1c2429" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -54,7 +54,7 @@ export default function RootLayout({
       lang="mn"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-[#1a2433] text-zinc-100">
+      <body className="flex min-h-full flex-col bg-[#f4f6f8] text-[#1c2429]">
         <AppShell>{children}</AppShell>
       </body>
     </html>

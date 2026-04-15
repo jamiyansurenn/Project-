@@ -59,13 +59,13 @@ export default function ProfilePage() {
     <div className="mx-auto min-h-full max-w-3xl space-y-10 px-4 py-4 pb-16 md:px-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-stone-500">
             Профайл
           </p>
           <h1 className="sim-heading mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
             Миний профайл
           </h1>
-          <p className="mt-2 max-w-xl text-sm text-zinc-400">
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-stone-600">
             Таны XP, даалгавар, дэлгүүрийн худалдан авалт бүгд серверт бүртгэгдэнэ.
           </p>
         </div>
@@ -73,7 +73,7 @@ export default function ProfilePage() {
           type="button"
           onClick={handleReset}
           disabled={resetting}
-          className="rounded-2xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-zinc-200 transition hover:border-amber-400/40 hover:bg-amber-500/10 disabled:opacity-50"
+          className="rounded-xl border border-stone-200/90 bg-white/80 px-4 py-2.5 text-sm font-semibold text-stone-800 shadow-sm transition duration-500 hover:border-amber-200/90 hover:bg-amber-50/80 disabled:opacity-50"
         >
           {resetting ? "Шинэчилж байна..." : "Демог дахин эхлүүлэх"}
         </button>
@@ -96,22 +96,22 @@ export default function ProfilePage() {
           { label: "XP үлдэгдэл", value: wallet.xpBalance },
         ].map((s) => (
           <div key={s.label} className="game-panel rounded-2xl p-4">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-stone-500">
               {s.label}
             </p>
-            <p className="mt-2 bg-gradient-to-r from-amber-200 to-violet-200 bg-clip-text text-2xl font-black text-transparent">
+            <p className="mt-2 bg-gradient-to-r from-teal-700 via-teal-600 to-sky-600 bg-clip-text text-2xl font-bold tabular-nums text-transparent">
               {s.value}
             </p>
           </div>
         ))}
       </section>
 
-      <section className="game-panel rounded-2xl border border-dashed border-amber-400/35 bg-gradient-to-br from-amber-500/10 via-transparent to-violet-600/10 p-4">
-        <p className="text-sm font-bold text-zinc-100">Дараагийн түвшний босго</p>
-        <p className="mt-1 text-sm text-zinc-400">
-          Таны түвшин: <span className="font-bold text-amber-200">{level}</span>.
+      <section className="game-panel rounded-2xl border border-dashed border-amber-200/80 bg-gradient-to-br from-amber-50/90 via-white/60 to-teal-50/50 p-5">
+        <p className="text-sm font-semibold text-stone-900">Дараагийн түвшний босго</p>
+        <p className="mt-2 text-sm leading-relaxed text-stone-600">
+          Таны түвшин: <span className="font-semibold text-amber-800">{level}</span>.
           Дараагийн түвшин{" "}
-          <span className="font-bold text-violet-200">{nextAt} XP</span> дээр нээгдэнэ. (0 ·
+          <span className="font-semibold text-teal-700">{nextAt} XP</span> дээр нээгдэнэ. (0 ·
           100 · 250 · 450…)
         </p>
       </section>
@@ -136,9 +136,9 @@ export default function ProfilePage() {
       <section className="space-y-4">
         <SectionTitle title="Дууссан даалгаврууд" />
         {completedQuests.length === 0 ? (
-          <p className="game-panel rounded-2xl p-6 text-sm text-zinc-400">
+          <p className="game-panel rounded-2xl p-6 text-sm leading-relaxed text-stone-600">
             Одоогоор дууссан даалгавар алга.{" "}
-            <Link href="/quests" className="font-bold text-amber-300 hover:text-amber-200">
+            <Link href="/quests" className="font-semibold text-teal-700 underline-offset-2 hover:underline">
               Даалгавар
             </Link>{" "}
             руу орж нэгийг дуусгаарай.
@@ -152,10 +152,10 @@ export default function ProfilePage() {
                   className="game-panel flex items-center justify-between rounded-2xl px-4 py-3"
                 >
                   <div>
-                    <p className="text-sm font-semibold text-zinc-100">{q.title}</p>
-                    <p className="text-xs text-zinc-500">{q.location}</p>
+                    <p className="text-sm font-semibold text-stone-900">{q.title}</p>
+                    <p className="text-xs text-stone-500">{q.location}</p>
                   </div>
-                  <span className="text-xs font-bold text-emerald-300">
+                  <span className="text-xs font-semibold text-teal-700">
                     +{getQuestRewardXp(q)} XP
                   </span>
                 </li>
@@ -165,10 +165,10 @@ export default function ProfilePage() {
         )}
       </section>
 
-      <section className="game-panel rounded-2xl p-4 text-xs text-zinc-500">
+      <section className="game-panel rounded-2xl p-4 text-xs text-stone-600">
         <p>
           Демо: {MOCK_QUESTS.length} даалгавар · төрөл{" "}
-          <span className="font-semibold text-zinc-300">
+          <span className="font-semibold text-stone-800">
             {TRAVELER_LABELS[user.travelerType]}
           </span>
           .
@@ -182,7 +182,7 @@ export default function ProfilePage() {
           subtitle="Даалгавар дуусгах болон дэлгүүрийн худалдан авалт энд түүх болон үлдэнэ."
         />
         {ledgerPreview.length === 0 ? (
-          <p className="game-panel rounded-2xl p-4 text-sm text-zinc-500">
+          <p className="game-panel rounded-2xl p-4 text-sm text-stone-600">
             Одоогоор XP гүйлгээ алга.
           </p>
         ) : (
@@ -193,18 +193,18 @@ export default function ProfilePage() {
                 className="game-panel flex items-center justify-between rounded-xl px-3 py-2 text-sm"
               >
                 <div>
-                  <p className="font-medium text-zinc-100">
+                  <p className="font-medium text-stone-900">
                     {entry.note ?? entry.sourceType}
                   </p>
-                  <p className="text-xs text-zinc-500">
+                  <p className="text-xs text-stone-500">
                     {new Date(entry.createdAt).toLocaleString("mn-MN")}
                   </p>
                 </div>
                 <span
                   className={
                     entry.delta >= 0
-                      ? "font-bold text-emerald-300"
-                      : "font-bold text-rose-300"
+                      ? "font-semibold text-teal-700"
+                      : "font-semibold text-rose-600"
                   }
                 >
                   {entry.delta >= 0 ? `+${entry.delta}` : entry.delta} XP
@@ -218,13 +218,13 @@ export default function ProfilePage() {
       <section className="grid gap-3 sm:grid-cols-2">
         <Link
           href="/shop"
-          className="game-panel rounded-2xl px-4 py-3 text-sm font-bold text-zinc-100 transition hover:border-amber-400/40 hover:shadow-[0_0_20px_rgba(251,191,36,0.15)]"
+          className="game-panel rounded-2xl px-4 py-3 text-sm font-semibold text-stone-900 transition duration-500 hover:border-amber-200/90 hover:shadow-md"
         >
           XP дэлгүүр рүү орох
         </Link>
         <Link
           href="/bag"
-          className="game-panel rounded-2xl px-4 py-3 text-sm font-bold text-zinc-100 transition hover:border-sky-400/40 hover:shadow-[0_0_20px_rgba(56,189,248,0.15)]"
+          className="game-panel rounded-2xl px-4 py-3 text-sm font-semibold text-stone-900 transition duration-500 hover:border-teal-200/90 hover:shadow-md"
         >
           Миний цүнх харах
         </Link>

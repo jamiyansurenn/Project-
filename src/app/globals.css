@@ -1,17 +1,36 @@
 @import "tailwindcss";
 
+/* —— Premium travel design tokens —— */
 :root {
-  --sim-bg: #1a2433;
-  --sim-glass: rgba(28, 38, 52, 0.78);
-  --sim-glass-border: rgba(186, 198, 214, 0.2);
-  --sim-accent: #38bdf8;
-  --foreground: #e4e4e7;
-  --muted: #94a3b8;
+  --travel-mist: #f4f6f8;
+  --travel-sky-wash: #e8f2f7;
+  --travel-sand: #f0ebe3;
+  --travel-sage: #c5d4c8;
+  --travel-stone: #5c656c;
+  --travel-ink: #1c2429;
+  --travel-ink-soft: #4a5561;
+  --travel-accent-sky: #6eb4cc;
+  --travel-accent-teal: #5a9d9a;
+  --travel-accent-amber: #d4a574;
+  --travel-accent-peach: #e8b89a;
+  --travel-gold: #c9a962;
+
+  --sim-bg: var(--travel-mist);
+  --foreground: var(--travel-ink);
+  --muted: var(--travel-ink-soft);
+
+  --sim-glass: rgba(255, 255, 255, 0.78);
+  --sim-glass-border: rgba(180, 190, 198, 0.45);
+  --sim-glass-strong: rgba(255, 255, 255, 0.9);
+
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-slow: 520ms;
+  --duration-medium: 400ms;
 }
 
 @theme inline {
-  --color-background: var(--sim-bg);
-  --color-foreground: var(--foreground);
+  --color-background: var(--travel-mist);
+  --color-foreground: var(--travel-ink);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -24,9 +43,10 @@ body {
   min-height: 100%;
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
+  line-height: 1.6;
 }
 
-/* App shell: simulation-style base */
+/* App shell */
 .sim-app {
   position: relative;
   isolation: isolate;
@@ -39,77 +59,155 @@ body {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 90% 70% at 50% 0%, rgba(100, 140, 180, 0.22) 0%, transparent 50%),
-    radial-gradient(ellipse 80% 60% at 80% 100%, rgba(45, 85, 65, 0.2) 0%, transparent 45%),
-    linear-gradient(180deg, #2a3548 0%, #222d3d 45%, #1a2433 100%);
+    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(180, 215, 232, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 60% at 100% 30%, rgba(232, 220, 200, 0.35) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 50% at 0% 70%, rgba(197, 212, 200, 0.25) 0%, transparent 45%),
+    linear-gradient(180deg, #eef4f7 0%, var(--travel-mist) 40%, #eef1f0 100%);
 }
 
 .sim-terrain::after {
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Glass panels — data / HUD */
+/* Glass — light, soft */
 .sim-glass,
 .game-panel {
   background: var(--sim-glass);
   border: 1px solid var(--sim-glass-border);
   box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+    0 2px 16px rgba(28, 36, 41, 0.06),
+    0 8px 32px rgba(28, 36, 41, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition:
+    box-shadow var(--duration-medium) var(--ease-premium),
+    border-color var(--duration-medium) var(--ease-premium),
+    transform var(--duration-medium) var(--ease-premium);
 }
 
 .sim-glass-strong,
 .game-panel-strong {
-  background: rgba(26, 34, 48, 0.9);
-  border: 1px solid rgba(186, 198, 214, 0.24);
+  background: var(--sim-glass-strong);
+  border: 1px solid rgba(180, 190, 198, 0.5);
   box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+    0 4px 24px rgba(28, 36, 41, 0.07),
+    0 12px 40px rgba(28, 36, 41, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
 }
 
 .sim-heading,
 .game-title-gradient {
-  color: #f4f4f5;
+  color: var(--travel-ink);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
 }
 
-/* Legacy class names used in map */
-.game-sky-layer {
-  display: none;
-}
-
+.game-sky-layer,
 .game-noise,
 .game-vignette {
   display: none;
 }
 
+/* Premium motion */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-gentle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes ambient-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(2%, -1%) scale(1.03);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.9s var(--ease-premium) both;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fade-up 0.9s var(--ease-premium) 0.1s both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fade-up 0.9s var(--ease-premium) 0.2s both;
+}
+
+.animate-float-gentle {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+.animate-float-gentle-delay {
+  animation: float-gentle 6.5s ease-in-out infinite;
+  animation-delay: 0.8s;
+}
+
+.animate-float-gentle-delay-2 {
+  animation: float-gentle 7s ease-in-out infinite;
+  animation-delay: 1.4s;
+}
+
+.animate-ambient-drift {
+  animation: ambient-drift 18s ease-in-out infinite;
+}
+
+.travel-chip {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(180, 190, 198, 0.4);
+  box-shadow: 0 4px 20px rgba(28, 36, 41, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.travel-section {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 @keyframes xp-pop {
   0% {
     opacity: 0;
-    transform: translateY(8px) scale(0.96);
+    transform: translateY(10px) scale(0.97);
   }
-  15% {
+  18% {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
   100% {
     opacity: 0;
-    transform: translateY(-24px) scale(1);
+    transform: translateY(-20px) scale(1);
   }
 }
 
 @keyframes level-flash {
   0% {
-    opacity: 0.4;
+    opacity: 0.22;
   }
   100% {
     opacity: 0;
@@ -126,31 +224,45 @@ body {
 }
 
 .animate-xp-pop {
-  animation: xp-pop 1.8s ease-out forwards;
+  animation: xp-pop 2.2s var(--ease-premium) forwards;
 }
 
 .animate-level-flash {
-  animation: level-flash 0.55s ease-out forwards;
+  animation: level-flash 0.75s var(--ease-premium) forwards;
 }
 
 .xp-bar-shine {
   position: absolute;
   inset: 0;
-  width: 35%;
+  width: 32%;
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.45),
     transparent
   );
-  animation: bar-shine 3s ease-in-out infinite;
+  animation: bar-shine 4s ease-in-out infinite;
 }
 
 ::selection {
-  background: rgba(56, 189, 248, 0.25);
+  background: rgba(110, 180, 204, 0.22);
 }
 
 :focus-visible {
-  outline: 2px solid rgba(56, 189, 248, 0.55);
-  outline-offset: 2px;
+  outline: 2px solid rgba(90, 157, 154, 0.45);
+  outline-offset: 3px;
+}
+
+/* Scroll reveal: initial state (JS toggles .is-visible) */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.85s var(--ease-premium),
+    transform 0.85s var(--ease-premium);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }

@@ -15,7 +15,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     setToasts((t) => [...t, { id, message, tone }]);
     window.setTimeout(() => {
       setToasts((t) => t.filter((x) => x.id !== id));
-    }, 3200);
+    }, 3600);
   }, []);
 
   const value = useMemo(() => push, [push]);
@@ -31,11 +31,11 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           <div
             key={t.id}
             className={cn(
-              "pointer-events-auto max-w-md rounded-2xl border px-4 py-3 text-sm shadow-lg backdrop-blur-xl transition duration-300",
+              "pointer-events-auto max-w-md rounded-2xl border px-4 py-3 text-sm shadow-lg backdrop-blur-xl transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
               t.tone === "success" &&
-                "border-amber-400/45 bg-gradient-to-r from-amber-500/20 to-emerald-600/15 text-amber-50 shadow-[0_0_24px_rgba(251,191,36,0.2)]",
+                "border-teal-200/80 bg-white/95 text-stone-800 shadow-teal-900/5",
               t.tone === "info" &&
-                "border-violet-400/40 bg-gradient-to-r from-violet-600/25 to-sky-600/15 text-violet-50 shadow-[0_0_20px_rgba(139,92,246,0.18)]",
+                "border-sky-200/80 bg-white/95 text-stone-800 shadow-sky-900/5",
             )}
           >
             {t.message}

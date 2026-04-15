@@ -43,7 +43,7 @@ export function StoreHydration({ children }: { children: React.ReactNode }) {
   if (!ready) {
     return (
       <div className="mx-auto flex min-h-[60vh] max-w-lg flex-col justify-center px-4 pb-24 pt-8">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-amber-200/70">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
           Ачаалж байна
         </p>
         <LoadingSkeleton className="h-10 w-48" />

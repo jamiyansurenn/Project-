@@ -45,7 +45,7 @@ export function XpLevelEffects() {
     <>
       {flash ? (
         <div
-          className="pointer-events-none fixed inset-0 z-[45] animate-level-flash bg-gradient-to-b from-sky-400/20 via-sky-500/10 to-transparent"
+          className="pointer-events-none fixed inset-0 z-[45] animate-level-flash bg-gradient-to-b from-teal-200/25 via-amber-100/15 to-transparent"
           aria-hidden
         />
       ) : null}
@@ -53,7 +53,7 @@ export function XpLevelEffects() {
         {pops.map((p) => (
           <div
             key={p.id}
-            className="animate-xp-pop absolute text-sm font-semibold tracking-tight text-sky-200 drop-shadow-sm"
+            className="animate-xp-pop absolute text-sm font-semibold tracking-tight text-teal-800 drop-shadow-sm"
             style={{ left: p.left, top: p.top }}
           >
             {p.text}

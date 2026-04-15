@@ -15,17 +15,17 @@ export function XPProgressBar({
 
   return (
     <div className={cn("space-y-2", className)}>
-      <div className="flex items-center justify-between text-xs font-semibold text-zinc-400">
+      <div className="flex items-center justify-between text-xs font-semibold text-stone-600">
         <span>
-          Түвшин <span className="font-mono text-sky-200">{level}</span>
-          <span className="text-zinc-600"> · </span>
-          <span className="font-mono text-zinc-500">{xp} XP</span>
+          Түвшин <span className="font-mono text-teal-700">{level}</span>
+          <span className="text-stone-400"> · </span>
+          <span className="font-mono text-stone-500">{xp} XP</span>
         </span>
-        <span className="text-zinc-500">Дараагийнх · {next} XP</span>
+        <span className="text-stone-500">Дараагийнх · {next} XP</span>
       </div>
-      <div className="relative h-2.5 overflow-hidden rounded-full bg-slate-900 ring-1 ring-white/10">
+      <div className="relative h-2.5 overflow-hidden rounded-full bg-stone-200/90 ring-1 ring-stone-200/80">
         <div
-          className="relative h-full overflow-hidden rounded-full bg-sky-500/85 transition-all duration-700"
+          className="relative h-full overflow-hidden rounded-full bg-gradient-to-r from-teal-500 to-sky-500 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
           style={{ width: `${percent}%` }}
         >
           <span className="xp-bar-shine" />

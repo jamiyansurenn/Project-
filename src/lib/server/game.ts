@@ -167,15 +167,50 @@ export async function updateDemoUserProfile(input: {
 }) {
   await ensureDemoUser();
 
-  const data: Prisma.UserUpdateInput = {};
-  if (input.name) data.name = input.name;
-  if (input.avatarId) data.avatarId = input.avatarId;
-  if (typeof input.onboarded === "boolean") data.onboarded = input.onboarded;
-  if (input.travelerType) data.travelerType = toDbTravelerType(input.travelerType);
+  await prisma.$transaction(async (tx) => {
+    const current = await tx.user.findUniqueOrThrow({
+      where: { id: DEMO_USER_ID },
+      select: { name: true, onboarded: true },
+    });
 
-  await prisma.user.update({
-    where: { id: DEMO_USER_ID },
-    data,
+    const incomingName = input.name?.trim();
+    const switchedIdentity =
+      Boolean(incomingName) &&
+      current.onboarded &&
+      current.name.trim().toLocaleLowerCase() !== incomingName!.toLocaleLowerCase();
+
+    // In demo mode we only have one backing user. When a new name starts onboarding,
+    // reset shared progress so previous player's XP/inventory does not leak.
+    if (switchedIdentity) {
+      await tx.activeQuest.deleteMany({
+        where: { userId: DEMO_USER_ID },
+      });
+      await tx.questCompletion.deleteMany({
+        where: { userId: DEMO_USER_ID },
+      });
+      await tx.xpLedger.deleteMany({
+        where: { userId: DEMO_USER_ID },
+      });
+      await tx.inventoryItem.deleteMany({
+        where: { userId: DEMO_USER_ID },
+      });
+    }
+
+    const data: Prisma.UserUpdateInput = {};
+    if (incomingName) data.name = incomingName;
+    if (input.avatarId) data.avatarId = input.avatarId;
+    if (typeof input.onboarded === "boolean") data.onboarded = input.onboarded;
+    if (input.travelerType) data.travelerType = toDbTravelerType(input.travelerType);
+
+    if (switchedIdentity) {
+      data.xp = 40;
+      data.level = getLevelFromXp(40);
+    }
+
+    await tx.user.update({
+      where: { id: DEMO_USER_ID },
+      data,
+    });
   });
 
   return getProfileSnapshot(DEMO_USER_ID);

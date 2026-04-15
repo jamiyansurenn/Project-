@@ -38,17 +38,17 @@ export function ExploreMapClient() {
             markers={markers}
             selectedId={selectedId}
             onSelect={setSelectedId}
-            className="h-full border border-white/40 shadow-md md:rounded-xl"
+            className="h-full border border-stone-200/80 shadow-md md:rounded-2xl"
           />
           {/* Зөвлөмж: баруун доод — зүүн дээд талд тэмдэгтэй давхцахгүй */}
           <div className="pointer-events-none absolute bottom-3 right-3 z-20 flex max-w-[min(320px,calc(100%-5rem))] flex-col gap-2 md:bottom-4 md:right-4">
-            <p className="sim-glass pointer-events-auto rounded-lg border border-white/15 px-3 py-2.5 text-left text-[11px] leading-relaxed text-zinc-200 shadow-md">
+            <p className="pointer-events-auto rounded-2xl border border-stone-200/80 bg-white/90 px-3 py-2.5 text-left text-[11px] leading-relaxed text-stone-600 shadow-md backdrop-blur-md">
               Цэг дээр дарж товч мэдээлэл харна. Бүтэн дэлгэрэнгүй болон шүүлтүүртэй харахад доорх
               товчийг дарна уу.
             </p>
             <Link
               href="/quests"
-              className="sim-glass pointer-events-auto rounded-md border border-sky-400/35 bg-sky-500/15 px-3 py-2.5 text-center text-xs font-semibold text-sky-50 shadow-md transition hover:bg-sky-500/25"
+              className="pointer-events-auto rounded-xl border border-teal-200/90 bg-teal-50/95 px-3 py-2.5 text-center text-xs font-semibold text-teal-900 shadow-md transition hover:bg-teal-100"
             >
               Даалгаврын шүүлтүүртэй харах →
             </Link>

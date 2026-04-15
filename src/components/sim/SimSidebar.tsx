@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { AlphaLogoMark } from "@/components/branding/AlphaLogoMark";
 import { cn } from "@/lib/cn";
 
 const tools = [
@@ -18,23 +18,18 @@ export function SimSidebar() {
   return (
     <aside
       className={cn(
-        "sim-glass-strong fixed bottom-0 left-0 top-0 z-[45] flex w-14 flex-col border-r border-white/10 py-3 md:w-52",
+        "sim-glass-strong fixed bottom-0 left-0 top-0 z-[45] flex w-14 flex-col border-r border-stone-200/70 py-3 shadow-sm md:w-52",
       )}
     >
       <Link
-        href="/quests"
+        href="/"
         className="mb-4 flex items-center justify-center gap-2 px-2 md:justify-start md:px-3"
+        aria-label="Нүүр хуудас"
       >
-        <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-md border border-white/15 bg-slate-900/60">
-          <Image
-            src="/alpha-logo.png"
-            alt=""
-            fill
-            sizes="36px"
-            className="object-contain p-0.5"
-          />
+        <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-teal-600/25 bg-gradient-to-br from-teal-600 to-teal-700 shadow-sm ring-1 ring-white/15">
+          <AlphaLogoMark className="h-[22px] w-[22px] text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.12)]" />
         </span>
-        <span className="hidden min-w-0 truncate text-left text-xs font-semibold leading-tight text-zinc-100 md:block">
+        <span className="hidden min-w-0 truncate text-left text-xs font-semibold leading-tight text-stone-800 md:block">
           Project α
         </span>
       </Link>
@@ -49,10 +44,10 @@ export function SimSidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-md px-2 py-2.5 text-xs font-medium transition md:px-3",
+                "flex items-center gap-3 rounded-xl px-2 py-2.5 text-xs font-medium transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:px-3",
                 active
-                  ? "bg-sky-500/20 text-sky-100 ring-1 ring-sky-400/30"
-                  : "text-zinc-400 hover:bg-white/5 hover:text-zinc-200",
+                  ? "bg-teal-50 text-teal-900 shadow-sm ring-1 ring-teal-200/70"
+                  : "text-stone-600 hover:bg-white/80 hover:text-stone-900",
               )}
             >
               <Icon className="h-5 w-5 shrink-0 opacity-90" active={active} />
@@ -62,8 +57,8 @@ export function SimSidebar() {
         })}
       </nav>
 
-      <div className="mt-auto hidden border-t border-white/10 px-3 py-2 text-[10px] text-zinc-500 md:block">
-        Аяллын симулятор
+      <div className="mt-auto hidden border-t border-stone-200/60 px-3 py-2 text-[10px] text-stone-500 md:block">
+        Аяллын платформ
       </div>
     </aside>
   );
@@ -76,6 +71,7 @@ function ExploreIcon({
   className?: string;
   active?: boolean;
 }) {
+  const c = active ? "text-teal-700" : "text-stone-500";
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
       <path
@@ -84,7 +80,7 @@ function ExploreIcon({
         strokeWidth="1.75"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className={active ? "text-sky-200" : "text-zinc-400"}
+        className={c}
       />
       <path
         d="M14 8h6v6"
@@ -92,14 +88,14 @@ function ExploreIcon({
         strokeWidth="1.75"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className={active ? "text-sky-200" : "text-zinc-400"}
+        className={c}
       />
     </svg>
   );
 }
 
 function QuestIcon({ className, active }: { className?: string; active?: boolean }) {
-  const c = active ? "text-sky-200" : "text-zinc-400";
+  const c = active ? "text-teal-700" : "text-stone-500";
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
       <path
@@ -121,22 +117,16 @@ function ProfileIcon({
   className?: string;
   active?: boolean;
 }) {
+  const c = active ? "text-teal-700" : "text-stone-500";
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
-      <circle
-        cx="12"
-        cy="8"
-        r="3.25"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        className={active ? "text-sky-200" : "text-zinc-400"}
-      />
+      <circle cx="12" cy="8" r="3.25" stroke="currentColor" strokeWidth="1.75" className={c} />
       <path
         d="M5 20v-1c0-2.5 3-4 7-4s7 1.5 7 4v1"
         stroke="currentColor"
         strokeWidth="1.75"
         strokeLinecap="round"
-        className={active ? "text-sky-200" : "text-zinc-400"}
+        className={c}
       />
     </svg>
   );
@@ -149,6 +139,7 @@ function TrophyIcon({
   className?: string;
   active?: boolean;
 }) {
+  const c = active ? "text-teal-700" : "text-stone-500";
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
       <path
@@ -157,7 +148,7 @@ function TrophyIcon({
         strokeWidth="1.75"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className={active ? "text-sky-200" : "text-zinc-400"}
+        className={c}
       />
     </svg>
   );

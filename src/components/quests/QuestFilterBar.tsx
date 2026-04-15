@@ -43,7 +43,7 @@ export function QuestFilterBar({
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Хайх..."
-          className="sim-glass w-full rounded-md border border-white/10 px-3 py-2.5 text-sm text-zinc-100 outline-none ring-0 transition placeholder:text-zinc-500 focus:border-sky-500/40 focus:ring-1 focus:ring-sky-500/30"
+          className="w-full rounded-xl border border-stone-200/90 bg-white/90 px-3 py-2.5 text-sm text-stone-800 shadow-sm outline-none ring-0 transition duration-300 placeholder:text-stone-400 focus:border-teal-300 focus:ring-2 focus:ring-teal-200/60"
         />
       </label>
       <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -53,10 +53,10 @@ export function QuestFilterBar({
             type="button"
             onClick={() => onStatusChange(t.id)}
             className={cn(
-              "whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold transition",
+              "whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
               statusFilter === t.id
-                ? "border border-sky-500/40 bg-sky-500/15 text-sky-100"
-                : "border border-white/10 bg-white/5 text-zinc-400 hover:border-white/20 hover:bg-white/5 hover:text-zinc-200",
+                ? "border border-teal-200/90 bg-teal-50 text-teal-900 shadow-sm"
+                : "border border-stone-200/70 bg-white/70 text-stone-600 hover:border-stone-300 hover:bg-white",
             )}
           >
             {t.label}
@@ -70,10 +70,10 @@ export function QuestFilterBar({
             type="button"
             onClick={() => onCategoryChange(c.id)}
             className={cn(
-              "rounded-full border px-3 py-1 text-xs font-medium transition",
+              "rounded-full border px-3 py-1 text-xs font-medium transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
               categoryFilter === c.id
-                ? "border-sky-400/45 bg-sky-500/15 text-sky-100"
-                : "border-white/10 text-zinc-400 hover:border-white/15 hover:text-zinc-200",
+                ? "border-teal-200/90 bg-teal-50/90 text-teal-900 shadow-sm"
+                : "border-stone-200/70 bg-white/60 text-stone-600 hover:border-stone-300",
             )}
           >
             {c.label}

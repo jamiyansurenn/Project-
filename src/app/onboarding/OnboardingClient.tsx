@@ -60,13 +60,13 @@ export function OnboardingClient() {
   return (
     <div className="mx-auto max-w-lg space-y-8 pb-16 pt-4">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-200/80">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-teal-700/90">
           Эхлэх
         </p>
         <h1 className="game-title-gradient mt-2 text-2xl font-bold tracking-tight">
           Аяллын төрлөө сонго
         </h1>
-        <p className="mt-2 text-sm text-zinc-400">
+        <p className="mt-2 text-sm leading-relaxed text-stone-600">
           Бүртгэл шаардлагагүй. Энэ демо таны төхөөрөмж дээр хадгалагдана.
         </p>
       </div>
@@ -75,7 +75,7 @@ export function OnboardingClient() {
 
       {step === 1 ? (
         <section className="game-panel-strong space-y-4 rounded-2xl p-5">
-          <h2 className="text-sm font-semibold text-zinc-100">Сонголт</h2>
+          <h2 className="text-sm font-semibold text-stone-900">Сонголт</h2>
           <div className="grid gap-3">
             {styles.map((s) => (
               <button
@@ -83,14 +83,14 @@ export function OnboardingClient() {
                 type="button"
                 onClick={() => setTravelerType(s.id)}
                 className={cn(
-                  "rounded-2xl border p-4 text-left transition duration-300",
+                  "rounded-2xl border p-4 text-left transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
                   travelerType === s.id
-                    ? "border-amber-400/50 bg-gradient-to-r from-amber-500/20 to-violet-600/15 shadow-[0_0_20px_rgba(251,191,36,0.2)]"
-                    : "game-panel border-transparent hover:border-violet-400/25",
+                    ? "border-teal-300/90 bg-gradient-to-r from-teal-50/95 to-sky-50/90 shadow-md ring-1 ring-teal-100/80"
+                    : "game-panel border-transparent hover:border-stone-200/90",
                 )}
               >
-                <p className="font-medium text-zinc-50">{TRAVELER_LABELS[s.id]}</p>
-                <p className="mt-1 text-sm text-zinc-400">{s.copy}</p>
+                <p className="font-medium text-stone-900">{TRAVELER_LABELS[s.id]}</p>
+                <p className="mt-1 text-sm leading-relaxed text-stone-600">{s.copy}</p>
               </button>
             ))}
           </div>
@@ -98,7 +98,7 @@ export function OnboardingClient() {
             type="button"
             disabled={!canContinueStep1}
             onClick={() => setStep(2)}
-            className="w-full rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-700 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition enabled:hover:brightness-110"
+            className="w-full rounded-xl bg-gradient-to-b from-teal-600 to-teal-700 py-3 text-sm font-semibold text-white shadow-md transition duration-500 enabled:hover:brightness-[1.03]"
           >
             Үргэлжлүүлэх
           </button>
@@ -107,7 +107,7 @@ export function OnboardingClient() {
 
       {step === 2 ? (
         <section className="game-panel-strong space-y-4 rounded-2xl p-5">
-          <h2 className="text-sm font-semibold text-zinc-100">Дүр сонгох</h2>
+          <h2 className="text-sm font-semibold text-stone-900">Дүр сонгох</h2>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {AVATAR_OPTIONS.map((a) => (
               <button
@@ -115,14 +115,14 @@ export function OnboardingClient() {
                 type="button"
                 onClick={() => setAvatarId(a.id)}
                 className={cn(
-                  "rounded-2xl border p-4 text-center transition duration-300",
+                  "rounded-2xl border p-4 text-center transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
                   avatarId === a.id
-                    ? "border-sky-400/50 bg-sky-500/15 shadow-[0_0_16px_rgba(56,189,248,0.25)]"
-                    : "game-panel border-transparent hover:border-white/15",
+                    ? "border-sky-300/90 bg-sky-50/95 shadow-md ring-1 ring-sky-100/80"
+                    : "game-panel border-transparent hover:border-stone-200/90",
                 )}
               >
                 <span className="text-3xl">{a.emoji}</span>
-                <p className="mt-2 text-xs font-medium text-zinc-200">{a.label}</p>
+                <p className="mt-2 text-xs font-medium text-stone-800">{a.label}</p>
               </button>
             ))}
           </div>
@@ -130,7 +130,7 @@ export function OnboardingClient() {
             <button
               type="button"
               onClick={() => setStep(1)}
-              className="game-panel flex-1 rounded-2xl border border-white/10 py-3 text-sm font-semibold text-zinc-200 transition hover:border-white/20"
+              className="game-panel flex-1 rounded-xl border border-stone-200/90 py-3 text-sm font-semibold text-stone-800 transition duration-500 hover:bg-stone-50/80"
             >
               Буцах
             </button>
@@ -138,7 +138,7 @@ export function OnboardingClient() {
               type="button"
               disabled={!canContinueStep2}
               onClick={() => setStep(3)}
-              className="flex-1 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-700 py-3 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition enabled:hover:brightness-110 disabled:opacity-40"
+              className="flex-1 rounded-xl bg-gradient-to-b from-teal-600 to-teal-700 py-3 text-sm font-semibold text-white shadow-md transition duration-500 enabled:hover:brightness-[1.03] disabled:opacity-40"
             >
               Үргэлжлүүлэх
             </button>
@@ -148,21 +148,21 @@ export function OnboardingClient() {
 
       {step === 3 ? (
         <section className="game-panel-strong space-y-4 rounded-2xl p-5">
-          <h2 className="text-sm font-semibold text-zinc-100">Нэр оруулах</h2>
+          <h2 className="text-sm font-semibold text-stone-900">Нэр оруулах</h2>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Жишээ: Нараа"
-            className="w-full rounded-2xl border border-white/15 bg-zinc-950/50 px-4 py-3 text-sm text-zinc-100 outline-none ring-0 placeholder:text-zinc-500 focus:border-amber-400/50 focus:ring-2 focus:ring-amber-400/25"
+            className="w-full rounded-xl border border-stone-200/90 bg-white/95 px-4 py-3 text-sm text-stone-900 outline-none ring-0 placeholder:text-stone-400 focus:border-teal-300/90 focus:ring-2 focus:ring-teal-200/60"
           />
-          <p className="text-xs text-zinc-500">
+          <p className="text-xs text-stone-500">
             Хамгийн багадаа 2 тэмдэгт. (Демо өгөгдөл)
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <button
               type="button"
               onClick={() => setStep(2)}
-              className="game-panel sm:flex-1 rounded-2xl border border-white/10 py-3 text-sm font-semibold text-zinc-200 transition hover:border-white/20"
+              className="game-panel sm:flex-1 rounded-xl border border-stone-200/90 py-3 text-sm font-semibold text-stone-800 transition duration-500 hover:bg-stone-50/80"
             >
               Буцах
             </button>
@@ -170,7 +170,7 @@ export function OnboardingClient() {
               type="button"
               disabled={saving || !canStart}
               onClick={startDemo}
-              className="sm:flex-1 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 py-3 text-sm font-semibold text-zinc-950 shadow-[0_0_28px_rgba(251,191,36,0.35)] transition enabled:hover:brightness-110 disabled:opacity-40 disabled:shadow-none"
+              className="sm:flex-1 rounded-xl bg-gradient-to-b from-amber-500 to-amber-600 py-3 text-sm font-semibold text-amber-950 shadow-md transition duration-500 enabled:hover:brightness-[1.03] disabled:opacity-40 disabled:shadow-none"
             >
               {saving ? "Түр хүлээнэ үү..." : "Эхлэх"}
             </button>
