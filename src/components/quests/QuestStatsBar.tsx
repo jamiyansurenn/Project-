@@ -3,9 +3,11 @@
 import { useMemo } from "react";
 import { useGameStore } from "@/store/useGameStore";
 import { getNextLevelThreshold, getXpProgress } from "@/lib/xp";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 export function QuestStatsBar() {
   const user = useGameStore((s) => s.user);
+  const { t } = useI18n();
   const { level, percent } = getXpProgress(user.xp);
   const nextAt = getNextLevelThreshold(user.xp);
 
@@ -19,13 +21,13 @@ export function QuestStatsBar() {
       <div className="flex flex-1 flex-col gap-2 sm:flex-row sm:items-center sm:gap-6">
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-wider text-stone-500">
-            Түвшин
+            {t("top.level")}
           </p>
           <p className="mt-0.5 font-mono text-2xl font-semibold tabular-nums text-stone-900">
             {level}
           </p>
           <p className="text-[10px] text-stone-500">
-            Дараагийн босго · {nextAt} XP
+            {t("quest.stats.next")} · {nextAt} XP
           </p>
         </div>
         <div className="hidden h-8 w-px bg-stone-200 sm:block" />
@@ -49,7 +51,7 @@ export function QuestStatsBar() {
       <div className="mt-3 flex gap-4 border-t border-stone-200/70 pt-3 sm:mt-0 sm:border-l sm:border-t-0 sm:pl-5 sm:pt-0">
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-wider text-stone-500">
-            Нийт XP
+            {t("quest.stats.totalXp")}
           </p>
           <p className="mt-0.5 font-mono text-base font-semibold tabular-nums text-stone-800">
             {user.xp}
@@ -57,7 +59,7 @@ export function QuestStatsBar() {
         </div>
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-wider text-stone-500">
-            Идэвхтэй
+            {t("top.active")}
           </p>
           <p className="mt-0.5 font-mono text-base font-semibold tabular-nums text-teal-800">
             {activeCount}

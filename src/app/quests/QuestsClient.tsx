@@ -10,6 +10,7 @@ import { MOCK_QUESTS } from "@/data/quests";
 import { resolveQuestStatus } from "@/lib/quest-status";
 import { useGameStore } from "@/store/useGameStore";
 import type { QuestCategory } from "@/types";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 function matchesSearch(text: string, q: string): boolean {
   if (!q.trim()) return true;
@@ -18,6 +19,7 @@ function matchesSearch(text: string, q: string): boolean {
 
 export function QuestsClient() {
   const user = useGameStore((s) => s.user);
+  const { t } = useI18n();
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
   const [categoryFilter, setCategoryFilter] = useState<QuestCategory | "all">(
     "all",
@@ -84,8 +86,8 @@ export function QuestsClient() {
           {quests.length === 0 ? (
             <div className="pointer-events-auto absolute left-1/2 top-[38%] z-30 w-[calc(100%-1.5rem)] max-w-md -translate-x-1/2 md:top-[35%]">
               <EmptyState
-                title="Илэрц олдсонгүй"
-                description="Шүүлтээ өөрчилж эсвэл хайлтаа цэвэрлээд дахин үзээрэй."
+                title={t("quest.empty.title")}
+                description={t("quest.empty.desc")}
                 action={
                   <button
                     type="button"
@@ -96,7 +98,7 @@ export function QuestsClient() {
                     }}
                     className="rounded-xl border border-teal-200/90 bg-teal-50 px-4 py-2 text-sm font-semibold text-teal-900 transition hover:bg-teal-100/80"
                   >
-                    Цэвэрлэх
+                    {t("quest.empty.clear")}
                   </button>
                 }
               />

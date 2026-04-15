@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { getQuestRewardXp, type Quest } from "@/data/quests";
 import { cn } from "@/lib/cn";
 import type { QuestDifficulty, QuestStatus } from "@/types";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 const difficultyLabel: Record<QuestDifficulty, string> = {
   easy: "Хялбар",
@@ -29,6 +30,8 @@ export function QuestSlidePanel({
   status: QuestStatus | null;
   onClose: () => void;
 }) {
+  const { t } = useI18n();
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -46,7 +49,7 @@ export function QuestSlidePanel({
     <>
       <button
         type="button"
-        aria-label="Хаах"
+        aria-label={t("quest.panel.close")}
         className={cn(
           "fixed inset-0 z-[55] bg-stone-900/25 backdrop-blur-[3px] transition-opacity duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden",
           open ? "opacity-100" : "pointer-events-none opacity-0",
@@ -74,7 +77,7 @@ export function QuestSlidePanel({
             onClick={onClose}
             className="rounded-lg border border-stone-200/80 bg-white/90 px-2.5 py-1 text-xs font-medium text-stone-700 shadow-sm transition duration-300 hover:border-teal-200"
           >
-            Хаах
+            {t("quest.panel.close")}
           </button>
         </div>
 
@@ -113,10 +116,10 @@ export function QuestSlidePanel({
             className="flex w-full items-center justify-center rounded-xl bg-gradient-to-b from-teal-600 to-teal-700 py-2.5 text-sm font-semibold text-white shadow-md transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:brightness-[1.03]"
             onClick={onClose}
           >
-            Дэлгэрэнгүй ба үйлдэл
+            {t("quest.panel.details")}
           </Link>
           <p className="mt-2 text-center text-[10px] text-stone-500">
-            Эхлүүлэх, дуусгах зэргийг дэлгэц дээрээс хийнэ.
+            {t("quest.panel.hint")}
           </p>
         </div>
       </aside>

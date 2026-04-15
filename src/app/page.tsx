@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { FeatureCard } from "@/components/landing/FeatureCard";
 import { HeroSection } from "@/components/landing/HeroSection";
@@ -7,8 +9,11 @@ import {
   DESTINATION_HIGHLIGHTS,
   FEATURED_BUSINESSES,
 } from "@/data/destinations";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 export default function LandingPage() {
+  const { t } = useI18n();
+
   return (
     <div className="space-y-20 pb-20 pt-6 sm:space-y-24 sm:pt-10">
       <HeroSection />
@@ -17,18 +22,18 @@ export default function LandingPage() {
         <section className="grid gap-5 sm:grid-cols-3 sm:gap-6">
           <FeatureCard
             icon="⚔️"
-            title="Даалгавар биелүүл"
-            description="Бодит газарт очиж алхам алхмаар биелүүлээд шагналаа ав."
+            title={t("home.feature.1.title")}
+            description={t("home.feature.1.desc")}
           />
           <FeatureCard
             icon="✨"
-            title="XP цуглуул"
-            description="XP нэмэгдэж, түвшин ахиж, амжилтууд нээгдэнэ."
+            title={t("home.feature.2.title")}
+            description={t("home.feature.2.desc")}
           />
           <FeatureCard
             icon="🧭"
-            title="Шинэ газрууд нээ"
-            description="Кафе, үзэмжийн цэг, зах, музей зэрэг газруудыг нээж судлаарай."
+            title={t("home.feature.3.title")}
+            description={t("home.feature.3.desc")}
           />
         </section>
       </RevealOnScroll>
@@ -36,9 +41,9 @@ export default function LandingPage() {
       <RevealOnScroll>
         <section className="rounded-3xl bg-gradient-to-b from-white/60 via-sky-50/30 to-transparent px-2 py-2 sm:px-4">
           <SectionTitle
-            eyebrow="Онцлох"
-            title="Монгол дахь жишиг цэгүүд"
-            subtitle="Демонд зориулсан жишээ картууд — даалгавартай холбоотой бодит байршлууд."
+            eyebrow={t("home.highlight.eyebrow")}
+            title={t("home.highlight.title")}
+            subtitle={t("home.highlight.subtitle")}
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {DESTINATION_HIGHLIGHTS.map((d) => (
@@ -69,9 +74,9 @@ export default function LandingPage() {
       <RevealOnScroll>
         <section className="rounded-3xl bg-gradient-to-b from-amber-50/25 via-transparent to-transparent px-2 py-2 sm:px-4">
           <SectionTitle
-            eyebrow="Орон нутгийн бизнес"
-            title="Демоны түнш газрууд"
-            subtitle="Даалгавраар дамжуулж бизнесүүдийг соёлтойгоор онцлох боломжтой."
+            eyebrow={t("home.partner.eyebrow")}
+            title={t("home.partner.title")}
+            subtitle={t("home.partner.subtitle")}
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
             {FEATURED_BUSINESSES.map((b) => (
@@ -91,25 +96,25 @@ export default function LandingPage() {
       <RevealOnScroll>
         <section className="sim-glass-strong rounded-3xl border-stone-200/70 p-8 sm:p-10">
           <SectionTitle
-            eyebrow="Яаж ажиллах вэ"
-            title="3 алхмаар эхний түвшинд"
+            eyebrow={t("home.how.eyebrow")}
+            title={t("home.how.title")}
           />
           <ol className="mt-10 grid gap-8 md:grid-cols-3 md:gap-10">
             {[
               {
                 n: "01",
-                t: "Даалгавар сонго",
-                d: "Өөрийн аялах хэв маягт таарсан даалгавраа сонго.",
+                t: t("home.how.1.title"),
+                d: t("home.how.1.desc"),
               },
               {
                 n: "02",
-                t: "Бодитоор очиж биелүүл",
-                d: "Алхам, XP, түвшин, байршил бүгд тодорхой.",
+                t: t("home.how.2.title"),
+                d: t("home.how.2.desc"),
               },
               {
                 n: "03",
-                t: "XP авч түвшин ахиул",
-                d: "Фото + GPS баталгаажуулалт (демо) ашиглан дуусгана.",
+                t: t("home.how.3.title"),
+                d: t("home.how.3.desc"),
               },
             ].map((s) => (
               <li
@@ -127,13 +132,13 @@ export default function LandingPage() {
               href="/onboarding"
               className="inline-flex flex-1 items-center justify-center rounded-2xl bg-gradient-to-b from-teal-600 to-teal-700 px-6 py-3.5 text-center text-sm font-semibold text-white shadow-md transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-lg"
             >
-              Аяллаа эхлэх
+              {t("hero.cta.start")}
             </Link>
             <Link
               href="/quests"
               className="inline-flex flex-1 items-center justify-center rounded-2xl border border-stone-300/80 bg-white/80 px-6 py-3.5 text-center text-sm font-medium text-stone-700 shadow-sm transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-teal-300/60 hover:shadow-md"
             >
-              Газрын зураг нээх
+              {t("hero.cta.map")}
             </Link>
           </div>
         </section>

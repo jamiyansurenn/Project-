@@ -5,6 +5,7 @@ import { cn } from "@/lib/cn";
 import type { Quest } from "@/data/quests";
 import type { QuestStatus } from "@/types";
 import { getQuestMapPosition } from "@/data/quest-map-positions";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 /** Watercolor / atlas style base — `travel-atlas-map.png` (та өөрийн зурагаар солино). */
 const MAP_TEXTURE_SRC = "/map/travel-atlas-map.png";
@@ -85,6 +86,7 @@ export function SimulationMapView({
   onSelect: (id: string | null) => void;
   className?: string;
 }) {
+  const { t } = useI18n();
   const sorted = useMemo(
     () => [...markers].sort((a, b) => a.quest.id.localeCompare(b.quest.id)),
     [markers],
@@ -169,9 +171,9 @@ export function SimulationMapView({
 
       <div className="pointer-events-none absolute left-3 top-[3.25rem] z-[7] max-w-[min(220px,85%)] rounded-lg border border-white/70 bg-white/90 px-2.5 py-1.5 text-[10px] font-medium leading-snug text-stone-700 shadow-md backdrop-blur-sm md:top-14">
         <span className="font-semibold uppercase tracking-wide text-teal-800/75">
-          Аяллын газрын зураг
+          {t("quest.map.title")}
         </span>
-        <span className="text-stone-500"> · демо</span>
+        <span className="text-stone-500"> · {t("quest.map.demo")}</span>
       </div>
     </div>
   );

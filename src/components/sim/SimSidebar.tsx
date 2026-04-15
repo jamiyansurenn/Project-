@@ -4,16 +4,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/cn";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 const tools = [
-  { href: "/explore", label: "Судлах", icon: ExploreIcon },
-  { href: "/quests", label: "Даалгавар", icon: QuestIcon },
-  { href: "/profile", label: "Профайл", icon: ProfileIcon },
-  { href: "/achievements", label: "Амжилт", icon: TrophyIcon },
+  { href: "/explore", labelKey: "nav.explore", icon: ExploreIcon },
+  { href: "/quests", labelKey: "nav.quests", icon: QuestIcon },
+  { href: "/profile", labelKey: "nav.profile", icon: ProfileIcon },
+  { href: "/achievements", labelKey: "nav.achievements", icon: TrophyIcon },
 ] as const;
 
 export function SimSidebar() {
   const pathname = usePathname();
+  const { t } = useI18n();
 
   return (
     <aside
@@ -57,14 +59,14 @@ export function SimSidebar() {
               )}
             >
               <Icon className="h-5 w-5 shrink-0 opacity-90" active={active} />
-              <span className="hidden md:inline">{item.label}</span>
+              <span className="hidden md:inline">{t(item.labelKey)}</span>
             </Link>
           );
         })}
       </nav>
 
       <div className="mt-auto hidden border-t border-stone-200/60 px-3 py-2 text-[10px] text-stone-500 md:block">
-        Аяллын платформ
+        {t("nav.platform")}
       </div>
     </aside>
   );

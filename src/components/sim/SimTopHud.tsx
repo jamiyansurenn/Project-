@@ -5,17 +5,20 @@ import { useMemo } from "react";
 import { getQuestById } from "@/data/quests";
 import { getXpProgress } from "@/lib/xp";
 import { useGameStore } from "@/store/useGameStore";
+import { LanguageToggle } from "@/components/ui/LanguageToggle";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 export function SimTopHud() {
   const user = useGameStore((s) => s.user);
+  const { t } = useI18n();
   const { level, percent } = getXpProgress(user.xp);
 
   const locationLabel = useMemo(() => {
     const first = user.activeQuestIds[0];
-    if (!first) return "Байршил сонгоогүй";
+    if (!first) return t("top.location.empty");
     const q = getQuestById(first);
     return q?.location ?? "—";
-  }, [user.activeQuestIds]);
+  }, [t, user.activeQuestIds]);
 
   const activeCount = user.activeQuestIds.length;
 
@@ -24,7 +27,7 @@ export function SimTopHud() {
       <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-4 gap-y-1 text-[11px] md:text-xs">
         <div className="flex items-center gap-1.5">
           <span className="font-medium uppercase tracking-wide text-stone-500">
-            Түвшин
+            {t("top.level")}
           </span>
           <span className="rounded-lg border border-stone-200/80 bg-white/90 px-1.5 py-0.5 font-mono font-semibold tabular-nums text-stone-800 shadow-sm">
             {level}
@@ -48,31 +51,32 @@ export function SimTopHud() {
         <div className="hidden h-3 w-px bg-stone-200 md:block" />
         <div className="flex items-center gap-1.5">
           <span className="font-medium uppercase tracking-wide text-stone-500">
-            Идэвхтэй
+            {t("top.active")}
           </span>
           <span className="font-mono font-semibold text-stone-800">{activeCount}</span>
         </div>
         <div className="hidden h-3 w-px bg-stone-200 lg:block" />
         <div className="hidden min-w-0 max-w-[200px] truncate lg:block" title={locationLabel}>
           <span className="font-medium uppercase tracking-wide text-stone-500">
-            Байршил
+            {t("top.location")}
           </span>{" "}
           <span className="text-stone-700">{locationLabel}</span>
         </div>
       </div>
 
       <div className="flex shrink-0 items-center gap-1.5">
+        <LanguageToggle />
         <Link
           href="/shop"
           className="rounded-lg border border-stone-200/80 bg-white/80 px-2 py-1 text-[10px] font-medium text-stone-700 shadow-sm transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-teal-200 hover:shadow md:text-xs"
         >
-          Дэлгүүр
+          {t("top.shop")}
         </Link>
         <Link
           href="/bag"
           className="rounded-lg border border-stone-200/80 bg-white/80 px-2 py-1 text-[10px] font-medium text-stone-700 shadow-sm transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-teal-200 hover:shadow md:text-xs"
         >
-          Цүнх
+          {t("top.bag")}
         </Link>
       </div>
     </header>
