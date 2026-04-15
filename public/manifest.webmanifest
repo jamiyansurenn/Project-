@@ -1,0 +1,17 @@
+{
+  "name": "Project α — Монголын адал явдал",
+  "short_name": "Project α",
+  "description": "Монгол орноор аялж, даалгавар биелүүлж, XP цуглуулан түвшин ахиул.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#f97316",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
